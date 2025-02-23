@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remover Fondo de Imagen</title>
+    <script type="module">
+        import { removeBackground } from "https://cdn.jsdelivr.net/npm/@imgly/background-removal@latest/+esm";
+
+        document.getElementById("imageInput").addEventListener("change", async function (event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            if (!file.type.includes("image")) {
+                document.getElementById("error").textContent = "Solo se permiten archivos de imagen";
+                return;
+            }
+
+            document.getElementById("error").textContent = "";
+            document.querySelector(".loader").style.display = "block";
+
+            const reader = new FileReader();
+            reader.onload = function () {
+                document.getElementById("originalImage").src = reader.result;
+            };
+            reader.readAsDataURL(file);
+
+            try {
+                // Convertimos la imagen a ArrayBuffer
+                const arrayBuffer = await file.arrayBuffer();
+                const blob2 = new Blob([arrayBuffer], { type: file.type });
+
+                // Eliminamos el fondo en el navegador (NO en el backend)
+                const result = await removeBackground(blob2, {
+                    model: "isnet_fp16", // isnet_fp16, isnet, dib, u2net, u2netp
+                    progress: (p) => {
+                        document.getElementById("loader-text").textContent = `Procesando... ${p}%`;
+                    }
+                });
+
+                // Convertir el resultado a un blob y mostrar la imagen sin fondo
+                const blob = new Blob([result], { type: "image/png" });
+                document.getElementById("noBackgroundImage").src = URL.createObjectURL(blob);
+            } catch (error) {
+                document.getElementById("error").textContent = "Error al procesar la imagen.";
+                console.error(error);
+            } finally {
+                document.querySelector(".loader").style.display = "none";
+            }
+        });
+    </script>
+
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        img { max-width: 100%; margin-top: 10px; border-radius: 8px; }
+        .container { max-width: 600px; margin: auto; }
+        .loader { display: none; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Remover Fondo de Imagen</h1>
+        <input type="file" id="imageInput" accept="image/*">
+        <p id="error" style="color: red;"></p>
+        <div class="loader">
+            <p id="loader-text">Procesando...</p>
+        </div>
+        <h3>Original:</h3>
+        <img id="originalImage" src="" alt="Imagen Original">
+        <h3>Sin Fondo:</h3>
+        <img id="noBackgroundImage" src="" alt="Imagen Sin Fondo">
+    </div>
+</body>
+</html>
