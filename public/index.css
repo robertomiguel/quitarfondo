@@ -63,7 +63,36 @@ input[type="file"] {
     font-size: 0.9em;
 }
 
-.hsl-controls {
+.controls-tabs {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.tab-button {
+    flex: 1;
+    padding: 8px;
+    background: #f0f0f0;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.tab-button:first-child {
+    border-radius: 5px 0 0 5px;
+}
+
+.tab-button:last-child {
+    border-radius: 0 5px 5px 0;
+}
+
+.tab-button.active {
+    background: #4CAF50;
+    color: white;
+    border-color: #4CAF50;
+}
+
+.control-panel {
+    display: none;
     margin: 15px 0;
     padding: 10px;
     background: #f8f8f8;
@@ -71,7 +100,11 @@ input[type="file"] {
     border: 1px solid #ddd;
 }
 
-.hsl-controls label {
+.control-panel.active {
+    display: block;
+}
+
+.control-panel label {
     display: block;
     margin: 8px 0 3px;
     font-size: 0.9em;

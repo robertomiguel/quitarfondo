@@ -2,6 +2,8 @@ import { removeBackground, preload } from "https://cdn.jsdelivr.net/npm/@imgly/b
 import { resizeImage } from './imageProcessing.js';
 import { trimTransparentEdges } from './imageProcessing.js';
 import { setupHslControls } from './hslControls.js';
+import { setupTonesControls } from './tonesControls.js';
+import { setupTabsController } from './tabsController.js';
 import { setupDropZone } from './dropHandler.js';
 import { setupPasteHandler } from './pasteHandler.js';
 import { fetchAndProcessImageFromUrl } from './urlHandler.js';
@@ -19,8 +21,10 @@ window.addEventListener("DOMContentLoaded", async function () {
 
         hasGPUSupport = await checkGPUSupport();
         
-        // Inicializar los controles HSL
+        // Inicializar los controles
         setupHslControls();
+        setupTonesControls();
+        setupTabsController();
         
         // Configurar el manejo de arrastrar y soltar
         setupDropZone(processImage, fetchAndProcessImageFromUrl);

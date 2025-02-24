@@ -29,7 +29,12 @@
             </div>
             <div class="image-box">
                 <h3>Imagen Sin Fondo:</h3>
-                <div class="hsl-controls">
+                <div class="controls-tabs">
+                    <button class="tab-button active" data-tab="hsl-panel">HSL</button>
+                    <button class="tab-button" data-tab="tones-panel">Tonos</button>
+                </div>
+                
+                <div id="hsl-panel" class="control-panel active">
                     <label for="hue">Tono (Hue): <span id="hueValue">0</span>°</label>
                     <input type="range" id="hue" min="0" max="360" value="0" class="slider">
                     
@@ -40,6 +45,22 @@
                     <input type="range" id="lightness" min="0" max="200" value="100" class="slider">
                     
                     <button id="resetHsl" class="button">Restablecer</button>
+                </div>
+                
+                <div id="tones-panel" class="control-panel">
+                    <label for="highlights">Altas luces: <span id="highlightsValue">0</span></label>
+                    <input type="range" id="highlights" min="-100" max="100" value="0" class="slider">
+                    
+                    <label for="shadows">Sombras: <span id="shadowsValue">0</span></label>
+                    <input type="range" id="shadows" min="-100" max="100" value="0" class="slider">
+                    
+                    <label for="whites">Blancos: <span id="whitesValue">0</span></label>
+                    <input type="range" id="whites" min="-100" max="100" value="0" class="slider">
+                    
+                    <label for="blacks">Negros: <span id="blacksValue">0</span></label>
+                    <input type="range" id="blacks" min="-100" max="100" value="0" class="slider">
+                    
+                    <button id="resetTones" class="button">Restablecer</button>
                 </div>
                 <img id="noBackgroundImage" src="" alt="Imagen Sin Fondo">
             </div>

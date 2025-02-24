@@ -11,9 +11,18 @@ export function setupHslControls() {
         document.getElementById('saturationValue').textContent = saturationValue;
         document.getElementById('lightnessValue').textContent = lightnessValue;
         
-        // Aplicar filtros CSS a la imagen
+        // Crear cadena de filtros HSL
+        const hslFilterString = `hue-rotate(${hueValue}deg) saturate(${saturationValue/100}) brightness(${lightnessValue/100})`;
+        
+        // Guardar los filtros HSL para uso posterior
         const imgElement = document.getElementById('noBackgroundImage');
-        imgElement.style.filter = `hue-rotate(${hueValue}deg) saturate(${saturationValue/100}) brightness(${lightnessValue/100})`;
+        imgElement.setAttribute('data-hsl-filters', hslFilterString);
+        
+        // Recuperar los filtros de tonos existentes
+        const toneFilters = imgElement.getAttribute('data-tone-filters') || '';
+        
+        // Aplicar combinación de filtros
+        imgElement.style.filter = hslFilterString + ' ' + toneFilters;
     }
     
     // Evento para restablecer los filtros HSL
