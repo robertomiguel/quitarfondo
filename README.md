@@ -2,15 +2,10 @@
 # ejemplo básico en NODE.JS
 # ejecutar: npm start
 
+# demo de como quitar fondos y trabajar imagenes en HTML, CSS, JAAVASCRIPT (vanilla)
+
 Background Removal in the Browser
-We are always looking for great people at IMG.LY. If you are working with our background removal library you might be a perfect fit! Apply now at IMG.LY Careers
-
-<p align="center"> <img src="https://img.ly/showcases/cesdk/web/s/case-thumbnail/background-removal/background-removal-0.png?utm_source=github&utm_medium=project&utm_campaign=background-removal-js" alt="background removal js showcase" /> </p>
-
-Remove backgrounds from images directly in the browser environment with ease and no additional costs or privacy concerns. Explore an interactive demo.
-
-News
-For more detail information please refer to the CHANGELOG.
+IMG.LY
 
 Overview
 @imgly/background-removal is a powerful npm package that allows developers to seamlessly remove the background from images directly in the browser. With its unique features and capabilities, this package offers an innovative and cost-effective solution for background removal tasks without compromising data privacy.
@@ -25,11 +20,12 @@ Seamless Integration with IMG.LY's CE.SDK: @imgly/background-removal provides se
 
 The Neural Network (ONNX model) and WASM files used by @imgly/background-removal are hosted by IMG.LY by default. See the section Custom Asset Serving if you want to host them on your own servers.
 
-Installation
+# Installation
 You can install @imgly/background-removal via npm or yarn. You also need to install the onnxruntime-web peer dependency. Use the following commands to install the packages:
 
-NPM
+# NPM
 npm install @imgly/background-removal onnxruntime-web@1.21.0-dev.20250114-228dd16893
+
 Usage
 import imglyRemoveBackground from "@imgly/background-removal"
 
@@ -55,10 +51,10 @@ type Config = {
     type: 'foreground' | 'background' | 'mask'; // The output type. (Default "foreground")
   };
 };
-NextJS
+# NextJS
 Note that currently only NextJS 15 is supported.
 
-Download Size vs Quality
+# Download Size vs Quality
 The onnx model is shipped in various sizes and needs.
 
 small (~40 MB) is the smallest model and is in most cases working fine but sometimes shows some artifacts. It's a quantized model.
@@ -72,7 +68,8 @@ const config: Configuration = ...;
 preload(config).then(() => {
   console.log("Asset preloading succeeded")
 })
-Download Progress Monitoring
+
+# Download Progress Monitoring
 On the first run, the necessary data will be fetched and stored in the browser cache. Since the download might take some time, you have the option to tap into the download progress.
 
 let config: Config = {
@@ -80,7 +77,8 @@ let config: Config = {
     console.log(`Downloading ${key}: ${current} of ${total}`);
   }
 };
-Performance
+
+# Performance
 The performance is largely dependent on the feature set available. Most prominently, ensure that SharedArrayBuffer is available MDN. Due to the security requirements of SharedArrayBuffer two headers need to be set to cross-origin isolate your site:
 
 'Cross-Origin-Opener-Policy': 'same-origin',
@@ -105,7 +103,8 @@ imglyRemoveBackground(image_src, config).then((blob: Blob) => {
   // It can be converted to an URL to be used as HTMLImage.src
   const url = URL.createObjectURL(blob);
 })
-Debug Outputs
+
+# Debug Outputs
 Enable debug outputs and logging to the console
 
 let config: Config = {
@@ -122,7 +121,7 @@ let config: Config = {
 Fetch Args
 fetchArgs are passed as second parameters to the fetch function as described in MDN.
 
-Who is it for?
+# Who is it for?
 @imgly/background-removal is ideal for developers and projects that require efficient and cost-effective background removal directly in the browser. It caters to a wide range of use cases, including but not limited to:
 
 E-commerce applications that need to remove backgrounds from product images in real time.
@@ -133,8 +132,8 @@ Web-based graphic design tools that aim to simplify the creative process with in
 
 Whether you are a professional developer or a hobbyist, @imgly/background-removal empowers you to deliver impressive applications and services with ease.
 
-License
+# License
 The software is free for use under the AGPL License. Please contact support@img.ly for questions about other licensing options.
 
-Authors & Contributors
+# Authors & Contributors
 This library is made by IMG.LY shipping the world's premier SDKs for building creative applications. Start your trial of the CreativeEditor SDK, PhotoEditor SDK & VideoEditor SDK.
